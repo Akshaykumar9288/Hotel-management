@@ -7,7 +7,7 @@ public class Main extends JFrame {
      JLabel jLabel;
     JButton jButton = new JButton();
     Main(){
-
+        System.out.println("Akshay");
         jLabel = new JLabel(new ImageIcon("C:\\Users\\Akshay Kumar\\Downloads\\439191 (1).jpg"));
         jLabel.setHorizontalAlignment(CENTER);
         jLabel.setVerticalAlignment(CENTER);
