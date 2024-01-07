@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 import static javax.swing.SwingConstants.CENTER;
 
@@ -22,12 +23,18 @@ public class Main extends JFrame {
         jButton.setForeground(Color.black);
         jLabel.setHorizontalAlignment(CENTER);
         jLabel.setVerticalAlignment(CENTER);
-
         jFrame.pack();
         jFrame.setLayout(null);
         jFrame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        jButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login login = new Login();
+                jFrame.dispose();
+            }
+        });
         while(true){
             jLabel1.setVisible(false); // lid =  j label
             try{
@@ -38,6 +45,7 @@ public class Main extends JFrame {
                 Thread.sleep(500);
             }catch(Exception e){}
         }
+
     }
     public static void main(String[] args) {
         Main m = new Main();
