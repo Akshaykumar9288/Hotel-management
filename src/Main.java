@@ -31,7 +31,7 @@ public class Main extends JFrame {
         jButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login login = new Login();
+               new Login();
                 jFrame.dispose();
             }
         });
@@ -39,11 +39,15 @@ public class Main extends JFrame {
             jLabel1.setVisible(false); // lid =  j label
             try{
                 Thread.sleep(500); //1000 = 1 second
-            }catch(Exception e){}
+            }catch(Exception e){
+                System.out.println(e);
+            }
             jLabel1.setVisible(true);
             try{
                 Thread.sleep(500);
-            }catch(Exception e){}
+            }catch(Exception e){
+                System.out.println(e);
+            }
         }
 
     }
