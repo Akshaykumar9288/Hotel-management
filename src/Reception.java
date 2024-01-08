@@ -72,7 +72,7 @@ public class Reception extends JFrame{
       setSize(600,600);
       setVisible(true);
       setLocation(600,150);
-      setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+     // setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
     public static void main(String[] args) {

@@ -42,6 +42,12 @@ public class Dashboard {
                         new AddRoom();
                 }
         });
+        jMenuItem1.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        new Add_Employee();
+                }
+        });
     }
 
         public static void main(String[] args) {

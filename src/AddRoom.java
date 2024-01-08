@@ -65,7 +65,7 @@ public class AddRoom extends JFrame{
         setSize(1000,450);
         setVisible(true);
         setLocation(400,150);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     public static void main(String[] args) {
         new AddRoom();
