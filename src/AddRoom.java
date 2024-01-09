@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.Stack;
 
 public class AddRoom extends JFrame{
@@ -66,6 +67,12 @@ public class AddRoom extends JFrame{
         setVisible(true);
         setLocation(400,150);
         //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        jButton1.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
     public static void main(String[] args) {
         new AddRoom();

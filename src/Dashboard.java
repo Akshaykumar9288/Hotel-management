@@ -48,6 +48,12 @@ public class Dashboard {
                         new Add_Employee();
                 }
         });
+        jMenuItem3.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        new Add_Driver();
+                }
+        });
     }
 
         public static void main(String[] args) {
