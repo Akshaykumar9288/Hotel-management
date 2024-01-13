@@ -72,7 +72,91 @@ public class Reception extends JFrame{
       setSize(600,600);
       setVisible(true);
       setLocation(600,150);
-     // setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+      jButton1.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              new Room();
+              dispose();
+          }
+      });
+      jButton10.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new Room_search();
+          }
+      });
+      jButton.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new New_Customer();
+          }
+      });
+      jButton3.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new Employee_Info();
+          }
+      });
+      jButton5.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new Manager_Info();
+          }
+      });
+      jButton4.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new Customer_Info();
+          }
+      });
+      jButton9.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new Pickup();
+          }
+      });
+      jButton8.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new Update_Room();
+          }
+      });
+      jButton7.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new Update_Check();
+          }
+      });
+      jButton2.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new Department();
+          }
+      });
+      jButton6.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+              new Check_out();
+          }
+      });
+      jButton11.addActionListener(new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              System.exit(0);
+          }
+
+      });
+
 
     }
     public static void main(String[] args) {
