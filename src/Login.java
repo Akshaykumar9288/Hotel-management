@@ -51,7 +51,7 @@ public class Login extends JFrame{
                                 ResultSet res = stm.executeQuery("select * from hotel where username ='"+username+"'"+" and password ='"+password+"'");
 
                                 if (res.next()){
-                                        dispose();
+                                        jFrame.dispose();
                                         new Dashboard();
                                 }else {
                                         jLabel3.setText("Something is Wrong");
