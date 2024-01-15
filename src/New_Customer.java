@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class New_Customer extends JFrame{
     JLabel jLabel = new JLabel("New Customer Form");
@@ -76,6 +80,18 @@ public class New_Customer extends JFrame{
                 new Reception();
             }
         });
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel","root","AK_shay2666");
+            Statement stm = conn.createStatement();
+            ResultSet resultSet = stm.executeQuery("select * from Rooms");
+            while (resultSet.next()){
+                choice.add(resultSet.getString("Room_Number"));
+            }
+        }catch (Exception e1){
+            System.out.println("Error is:"+e1);
+        }
+
     }
     public static void main(String[] args) {
         new New_Customer();

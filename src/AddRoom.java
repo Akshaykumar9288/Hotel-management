@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.Stack;
 
 public class AddRoom extends JFrame{
@@ -71,6 +74,34 @@ public class AddRoom extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+            }
+        });
+        jButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (jTextField.getText().isBlank()||jTextField1.getText().isBlank()||jTextField1.getText().matches("[a-zA-Z]+")||jTextField.getText().matches("[a-zA-Z]+")){
+                    JOptionPane.showMessageDialog(null,"Plz enter Correct Information\nAnd Fill All Information");
+                }else {
+                    try {
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel","root","AK_shay2666");
+                        Statement stm = conn.createStatement();
+                        int Room = Integer.parseInt(jTextField.getText());
+                        String Available = (String) comboBox.getSelectedItem();
+                        String Clean_status = (String) comboBox1.getSelectedItem();
+                        int price = Integer.parseInt(jTextField1.getText());
+                        String Bed_type = (String) comboBox2.getSelectedItem();
+                        int result = stm.executeUpdate("insert into Rooms (Room_Number, Available, CleaningStatus, Price, Bed_type) values ("+Room+",'"+Available+"','"+Clean_status+"',"+price+",'"+Bed_type+"')");
+                        if (result==1){
+                            JOptionPane.showMessageDialog(null,"Room Added");
+                        }else {
+                            JOptionPane.showMessageDialog(null,"Room not added because of some error");
+                        }
+
+                    }catch (Exception e1){
+                        System.out.println("Error is:"+e1);
+                    }
+                }
             }
         });
     }

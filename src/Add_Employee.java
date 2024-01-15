@@ -16,7 +16,7 @@ public class Add_Employee extends JFrame {
     JLabel jLabel6 = new JLabel("Aadhar");
     JLabel jLabel7 = new JLabel("Email");
     JLabel jLabel8 = new JLabel(new ImageIcon("C:\\Users\\Akshay Kumar\\OneDrive\\Pictures\\360_F_249058233_0MIaTy9WXtKHF0eacUSg9c3hkV9ehIbX.jpg"));
-    JTextField jTextField = new JTextField("Akshay");
+    JTextField jTextField = new JTextField();
     JTextField jTextField1 = new JTextField();
     JRadioButton jRadioButton2 = new JRadioButton("Male");
     JRadioButton jRadioButton_2 = new JRadioButton("Female");
@@ -26,7 +26,7 @@ public class Add_Employee extends JFrame {
     ButtonGroup buttonGroup = new ButtonGroup();
     String job[] = {"Front Desk Clerks","Porters","Housekeeping","Kitchen Staff","Room Service","Waiter/Waitress","Manager","Accountant","Chef"};
     JComboBox jTextField3 = new JComboBox(job);
-    JTextField jTextField7 = new JTextField("akshay022@gmail.com");
+    JTextField jTextField7 = new JTextField();
     JButton jButton = new JButton("Submit");
     boolean isSelected2 = jRadioButton2.isSelected();
     boolean isSelected_2 = jRadioButton_2.isSelected();

@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class Add_Driver extends JFrame{
     JLabel jLabel = new JLabel("Add Diver");
@@ -86,6 +89,35 @@ public class Add_Driver extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+            }
+        });
+        jButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (jTextField.getText().isBlank()||jTextField1.getText().isBlank()||jTextField2.getText().isBlank()||jTextField3.getText().isBlank()||jTextField4.getText().isBlank()||jTextField.getText().matches("^\\d*$")||jTextField1.getText().matches("[a-zA-Z]+")||jTextField2.getText().matches("^\\d*$")||jTextField3.getText().matches("^\\d*$")||jTextField4.getText().matches("^\\d*$")){
+                    JOptionPane.showMessageDialog(null,"Plz enter Correct Information\nAnd Fill All Information");
+                }else {
+                    try {
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel","root","AK_shay2666");
+                        Statement stm = conn.createStatement();
+                        String Name = jTextField.getText();
+                        int Age = Integer.parseInt(jTextField1.getText());
+                        String Gender = (String) jComboBox.getSelectedItem();
+                        String Car_company = jTextField2.getText();
+                        String Car_brand = jTextField3.getText();
+                        String Available = (String) jComboBox1.getSelectedItem();
+                        String location = jTextField4.getText();
+                        int result = stm.executeUpdate("insert into Add_Driver (Name, Age, Gender, Car_Company, Car_Brand, Available, Location) values ('"+Name+"',"+Age+",'"+Gender+"','"+Car_company+"','"+Car_brand+"','"+Available+"','"+location+"')");
+                        if (result == 1){
+                            JOptionPane.showMessageDialog(null,"Driver Added");
+                        }else {
+                            JOptionPane.showMessageDialog(null,"Added fail due to some Error");
+                        }
+                    }catch (Exception e1){
+
+                    }
+                }
             }
         });
     }
