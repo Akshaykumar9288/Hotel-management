@@ -1,6 +1,8 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.*;
 
 public class Employee_Info extends JFrame {
     private JLabel jLabel = new JLabel("Name");
@@ -13,8 +15,7 @@ public class Employee_Info extends JFrame {
     JLabel jLabel7 = new JLabel("Gmail");
     private JTable jTable = new JTable();
     JButton jButton = new JButton("Back");
-
-
+    DefaultTableModel defaultTableModel = new DefaultTableModel();
     Employee_Info(){
         add(jLabel);
         add(jLabel1);
@@ -39,9 +40,31 @@ public class Employee_Info extends JFrame {
         jButton.setBounds(350, 500, 120, 30);
         jTable.setBounds(0, 34, 1000, 450);
         setLayout(null);
-        setSize(1000,600);
+        setSize(1020,600);
         setVisible(true);
         setLocation(400,100);
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "AK_shay2666");
+            Statement stm = conn.createStatement();
+            ResultSet resultSet = stm.executeQuery("select * from Employee");
+            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+            int columCount = resultSetMetaData.getColumnCount();
+            for (int i = 1; i <=columCount;i++){
+                defaultTableModel.addColumn(resultSetMetaData.getColumnName(i));
+            }
+            while (resultSet.next()){
+                Object [] row = new Object[columCount];
+                for (int i = 1; i <= columCount; i++){
+                    row[i-1] = resultSet.getObject(i);
+                }
+                defaultTableModel.addRow(row);
+            }
+            jTable.setModel(defaultTableModel);
+        }catch (Exception e1){
+
+        }
         jButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

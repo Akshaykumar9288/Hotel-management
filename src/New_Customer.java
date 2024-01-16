@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,6 +26,8 @@ public class New_Customer extends JFrame{
     JButton jButton = new JButton("Add Customer");
     JButton jButton1 = new JButton("Back");
     JLabel jLabel7 = new JLabel(new ImageIcon("C:\\Users\\Akshay Kumar\\OneDrive\\Desktop\\download (3).jpeg"));
+    JLabel jLabel8 = new JLabel("Deposit");
+    JTextField jTextField3 = new JTextField();
     New_Customer(){
         add(jLabel);
         add(jLabel1);
@@ -43,6 +46,8 @@ public class New_Customer extends JFrame{
         add(jButton);
         add(jButton1);
         add(jLabel7);
+        add(jLabel8);
+        add(jTextField3);
         buttonGroup.add(jRadioButton);
         buttonGroup.add(jRadioButton1);
         jLabel.setFont(new Font("Yu Mincho", Font.PLAIN, 20));
@@ -64,11 +69,15 @@ public class New_Customer extends JFrame{
         choice.setBounds(271, 279, 150, 20);
         jButton.setBounds(100, 350, 120, 30);
         jButton1.setBounds(300, 350, 120, 30);
+        jLabel8.setBounds(35, 310, 200, 14);
+        jTextField3.setBounds(271,310,150,20);
         jButton.setBackground(Color.BLACK);
         jButton.setForeground(Color.white);
         jButton1.setBackground(Color.BLACK);
         jButton1.setForeground(Color.white);
         jLabel7.setBounds(460,-70,300,500);
+        jRadioButton.setActionCommand("Male");
+        jRadioButton1.setActionCommand("Female");
         setLayout(null);
         setSize(800, 450);
         setVisible(true);
@@ -84,13 +93,46 @@ public class New_Customer extends JFrame{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel","root","AK_shay2666");
             Statement stm = conn.createStatement();
-            ResultSet resultSet = stm.executeQuery("select * from Rooms");
+            ResultSet resultSet = stm.executeQuery("select * from Rooms where Available = 'Available'");
             while (resultSet.next()){
                 choice.add(resultSet.getString("Room_Number"));
             }
         }catch (Exception e1){
             System.out.println("Error is:"+e1);
         }
+        jButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (jTextField.getText().isBlank()||jTextField1.getText().isBlank()||jTextField2.getText().isBlank()||(jRadioButton.isSelected()==false&&jRadioButton1.isSelected()==false)||jTextField.getText().matches("[a-zA-Z]+")||jTextField1.getText().matches("^\\d*$")||jTextField2.getText().matches("^\\d*$")||jTextField3.getText().isBlank()||jTextField3.getText().matches("[a-zA-Z]+")){
+                    JOptionPane.showMessageDialog(null,"Plz enter Correct Information\nAnd Fill All Information");
+                }else {
+                    try{
+                        Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel","root","AK_shay2666");
+                        Statement stm = conn.createStatement();
+
+                        String ID = (String) jComboBox.getSelectedItem();
+                        String num = jTextField.getText();
+                        BigInteger Number = new BigInteger(num);
+                        String Name = jTextField1.getText();
+                        String Gender = buttonGroup.getSelection().getActionCommand();
+                        String Country = jTextField2.getText();
+                        String Allocate = (String)choice.getSelectedItem();
+                        int Allocation = Integer.parseInt(Allocate);
+                        int Deposit = Integer.parseInt(jTextField3.getText());
+                        int result = stm.executeUpdate("insert into New_Customer (ID, Number, Name, Gender, Country, Allocated, Deposit) values ('"+ID+"',"+Number+",'"+Name+"','"+Gender+"','"+Country+"','"+Allocation+"',"+Deposit+")");
+                        int result1 = stm.executeUpdate("update Rooms set Available = 'Occupied' where Room_Number = "+Allocation);
+                       if (result==1){
+                           JOptionPane.showMessageDialog(null,"Customer Added");
+                       }else {
+                           JOptionPane.showMessageDialog(null,"Added Fail");
+                       }
+                    }catch (Exception e1){
+                        System.out.println("Error is: "+e1);
+                    }
+                }
+            }
+        });
 
     }
     public static void main(String[] args) {

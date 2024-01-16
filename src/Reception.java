@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class Reception extends JFrame{
     JButton jButton = new JButton("New Customer Form");
@@ -75,8 +76,8 @@ public class Reception extends JFrame{
       jButton1.addActionListener(new AbstractAction() {
           @Override
           public void actionPerformed(ActionEvent e) {
-              new Room();
               dispose();
+              new Room();
           }
       });
       jButton10.addActionListener(new AbstractAction() {
